@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "portfolio-mobile",
+    "name": "portfolio-marcela-cantalice",
     "slug": "portfolio-mobile",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -37,6 +37,23 @@
     "experiments": {
       "typedRoutes": true,
       "reactCompiler": true
+    },
+    "extra": {
+      "router": {
+        "asyncRoutes": {
+          "web": true
+        }
+      },
+      "eas": {
+        "projectId": "3d55b3e6-b3d8-4a55-94bb-456476b75664"
+      }
+    },
+    "owner": "mateusjoses-team",
+    "updates": {
+      "url": "https://u.expo.dev/3d55b3e6-b3d8-4a55-94bb-456476b75664"
+    },
+    "runtimeVersion": {
+      "policy": "appVersion"
     }
   }
 }
