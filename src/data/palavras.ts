@@ -1,0 +1,36 @@
+export const palavras = [
+  "GATO",
+  "CACHORRO",
+  "ELEFANTE",
+  "GIRAFA",
+  "LEAO",
+  "TIGRE",
+  "ZEBRA",
+  "MACACO",
+  "COELHO",
+  "CAVALO",
+  "TARTARUGA",
+  "BORBOLETA",
+  "PINGUIM",
+  "GOLFINHO",
+  "TUBARAO",
+  "POLVO",
+  "CAMELO",
+  "RAPOSA",
+  "LOBO",
+  "URSO",
+  "PANDA",
+  "CANGURU",
+  "CORUJA",
+  "PAPAGAIO",
+  "JACARE",
+  "RINOCERONTE",
+  "HIPOPOTAMO",
+  "GORILA",
+  "FORMIGA",
+  "ABELHA",
+];
+
+export const alfabeto = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+
+export const maximoTentativas = 6;

@@ -1,98 +1,115 @@
-import * as Device from 'expo-device';
-import { Platform, StyleSheet } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { LinearGradient } from "expo-linear-gradient";
+import { useRouter } from "expo-router";
+import { StyleSheet, Text, View } from "react-native";
+import Botao from "../components/Botao";
+import CursorTerminal from "../components/CursorTerminal";
+import FotoPerfil from "../components/FotoPerfil";
+import Tela from "../components/Tela";
+import TextoGradiente from "../components/TextoGradiente";
+import {
+  bordas,
+  cores,
+  espacamentos,
+  fontes,
+} from "../constants/tema";
+import useDecodificacao from "../hooks/useDecodificacao";
 
-import { AnimatedIcon } from '@/components/animated-icon';
-import { HintRow } from '@/components/hint-row';
-import { ThemedText } from '@/components/themed-text';
-import { ThemedView } from '@/components/themed-view';
-import { WebBadge } from '@/components/web-badge';
-import { BottomTabInset, MaxContentWidth, Spacing } from '@/constants/theme';
+export default function Home() {
+  const router = useRouter();
+  const nome = useDecodificacao("Marcela Cantalice");
 
-function getDevMenuHint() {
-  if (Platform.OS === 'web') {
-    return <ThemedText type="small">use browser devtools</ThemedText>;
-  }
-  if (Device.isDevice) {
-    return (
-      <ThemedText type="small">
-        shake device or press <ThemedText type="code">m</ThemedText> in terminal
-      </ThemedText>
-    );
-  }
-  const shortcut = Platform.OS === 'android' ? 'cmd+m (or ctrl+m)' : 'cmd+d';
   return (
-    <ThemedText type="small">
-      press <ThemedText type="code">{shortcut}</ThemedText>
-    </ThemedText>
+    <Tela>
+      <View style={estilos.container}>
+        <LinearGradient
+          colors={["#18152e", cores.fundo, "#101b30"]}
+          start={{ x: 0, y: 0 }}
+          end={{ x: 1, y: 1 }}
+          style={StyleSheet.absoluteFill}
+        />
+
+        <FotoPerfil />
+
+        <View style={estilos.apresentacao}>
+          <Text style={estilos.saudacao}>
+            Olá, eu sou
+          </Text>
+
+          <View style={estilos.nomeContainer}>
+            <TextoGradiente
+              texto={nome}
+              estilo={estilos.nome}
+            />
+            <CursorTerminal />
+          </View>
+
+          <Text style={estilos.titulo}>
+            Estudante de Ciência da Computação
+          </Text>
+
+          <Text style={estilos.descricao}>
+            Entre ideias, códigos e projetos, construindo
+            meu caminho na tecnologia.
+          </Text>
+
+          <View style={estilos.botoes}>
+            <Botao
+              titulo="Conheça meus projetos"
+              aoPressionar={() => router.navigate("/projetos")}
+            />
+
+            <Botao
+              titulo="Entre em contato"
+              variante="secundario"
+              aoPressionar={() => router.navigate("/contato")}
+            />
+          </View>
+        </View>
+      </View>
+    </Tela>
   );
 }
 
-export default function HomeScreen() {
-  return (
-    <ThemedView style={styles.container}>
-      <SafeAreaView style={styles.safeArea}>
-        <ThemedView style={styles.heroSection}>
-          <AnimatedIcon />
-          <ThemedText type="title" style={styles.title}>
-            Welcome to&nbsp;Expo
-          </ThemedText>
-        </ThemedView>
-
-        <ThemedText type="code" style={styles.code}>
-          get started
-        </ThemedText>
-
-        <ThemedView type="backgroundElement" style={styles.stepContainer}>
-          <HintRow
-            title="Try editing"
-            hint={<ThemedText type="code">src/app/index.tsx</ThemedText>}
-          />
-          <HintRow title="Dev tools" hint={getDevMenuHint()} />
-          <HintRow
-            title="Fresh start"
-            hint={<ThemedText type="code">npm run reset-project</ThemedText>}
-          />
-        </ThemedView>
-
-        {Platform.OS === 'web' && <WebBadge />}
-      </SafeAreaView>
-    </ThemedView>
-  );
-}
-
-const styles = StyleSheet.create({
+const estilos = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    flexDirection: 'row',
+    justifyContent: "center",
+    paddingVertical: espacamentos.grande,
+    paddingHorizontal: espacamentos.pequeno,
+    borderRadius: bordas.grande,
+    overflow: "hidden",
+    gap: espacamentos.grande,
   },
-  safeArea: {
-    flex: 1,
-    paddingHorizontal: Spacing.four,
-    alignItems: 'center',
-    gap: Spacing.three,
-    paddingBottom: BottomTabInset + Spacing.three,
-    maxWidth: MaxContentWidth,
+  apresentacao: {
+    gap: espacamentos.medio,
   },
-  heroSection: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    flex: 1,
-    paddingHorizontal: Spacing.four,
-    gap: Spacing.four,
+  saudacao: {
+    color: cores.texto,
+    fontSize: fontes.normal,
   },
-  title: {
-    textAlign: 'center',
+  nomeContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    flexWrap: "wrap",
+    minHeight: 48,
   },
-  code: {
-    textTransform: 'uppercase',
+  nome: {
+    fontSize: 32,
+    fontWeight: "bold",
   },
-  stepContainer: {
-    gap: Spacing.three,
-    alignSelf: 'stretch',
-    paddingHorizontal: Spacing.three,
-    paddingVertical: Spacing.four,
-    borderRadius: Spacing.four,
+  titulo: {
+    color: cores.branco,
+    fontSize: 23,
+    fontWeight: "bold",
+    lineHeight: 30,
+  },
+  descricao: {
+    color: cores.textoSecundario,
+    fontSize: fontes.normal,
+    lineHeight: 26,
+  },
+  botoes: {
+    gap: 12,
+    marginTop: espacamentos.pequeno,
   },
 });
